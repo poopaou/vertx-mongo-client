@@ -50,19 +50,19 @@ public interface MongoService extends MongoClient {
 
   @Override
   @Fluent
-  MongoService update(String collection, JsonObject query, JsonObject update, Handler<AsyncResult<Void>> resultHandler);
+  MongoService update(String collection, JsonObject query, JsonObject update, Handler<AsyncResult<Long>> resultHandler);
 
   @Override
   @Fluent
-  MongoService updateWithOptions(String collection, JsonObject query, JsonObject update, UpdateOptions options, Handler<AsyncResult<Void>> resultHandler);
+  MongoService updateWithOptions(String collection, JsonObject query, JsonObject update, UpdateOptions options, Handler<AsyncResult<Long>> resultHandler);
 
   @Override
   @Fluent
-  MongoService replace(String collection, JsonObject query, JsonObject replace, Handler<AsyncResult<Void>> resultHandler);
+  MongoService replace(String collection, JsonObject query, JsonObject replace, Handler<AsyncResult<Long>> resultHandler);
 
   @Override
   @Fluent
-  MongoService replaceWithOptions(String collection, JsonObject query, JsonObject replace, UpdateOptions options, Handler<AsyncResult<Void>> resultHandler);
+  MongoService replaceWithOptions(String collection, JsonObject query, JsonObject replace, UpdateOptions options, Handler<AsyncResult<Long>> resultHandler);
 
   @Override
   @Fluent
@@ -90,19 +90,19 @@ public interface MongoService extends MongoClient {
 
   @Override
   @Fluent
-  MongoService remove(String collection, JsonObject query, Handler<AsyncResult<Void>> resultHandler);
+  MongoService remove(String collection, JsonObject query, Handler<AsyncResult<Long>> resultHandler);
 
   @Override
   @Fluent
-  MongoService removeWithOptions(String collection, JsonObject query, WriteOption writeOption, Handler<AsyncResult<Void>> resultHandler);
+  MongoService removeWithOptions(String collection, JsonObject query, WriteOption writeOption, Handler<AsyncResult<Long>> resultHandler);
 
   @Override
   @Fluent
-  MongoService removeOne(String collection, JsonObject query, Handler<AsyncResult<Void>> resultHandler);
+  MongoService removeOne(String collection, JsonObject query, Handler<AsyncResult<Long>> resultHandler);
 
   @Override
   @Fluent
-  MongoService removeOneWithOptions(String collection, JsonObject query, WriteOption writeOption, Handler<AsyncResult<Void>> resultHandler);
+  MongoService removeOneWithOptions(String collection, JsonObject query, WriteOption writeOption, Handler<AsyncResult<Long>> resultHandler);
 
   @Override
   @Fluent

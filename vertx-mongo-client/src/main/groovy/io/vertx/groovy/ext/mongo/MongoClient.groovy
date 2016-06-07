@@ -125,7 +125,7 @@ public class MongoClient {
    * @param resultHandler will be called when complete
    * @return 
    */
-  public MongoClient update(String collection, Map<String, Object> query, Map<String, Object> update, Handler<AsyncResult<Void>> resultHandler) {
+  public MongoClient update(String collection, Map<String, Object> query, Map<String, Object> update, Handler<AsyncResult<Long>> resultHandler) {
     this.delegate.update(collection, query != null ? new io.vertx.core.json.JsonObject(query) : null, update != null ? new io.vertx.core.json.JsonObject(update) : null, resultHandler);
     return this;
   }
@@ -138,7 +138,7 @@ public class MongoClient {
    * @param resultHandler will be called when complete
    * @return 
    */
-  public MongoClient updateWithOptions(String collection, Map<String, Object> query, Map<String, Object> update, Map<String, Object> options, Handler<AsyncResult<Void>> resultHandler) {
+  public MongoClient updateWithOptions(String collection, Map<String, Object> query, Map<String, Object> update, Map<String, Object> options, Handler<AsyncResult<Long>> resultHandler) {
     this.delegate.updateWithOptions(collection, query != null ? new io.vertx.core.json.JsonObject(query) : null, update != null ? new io.vertx.core.json.JsonObject(update) : null, options != null ? new io.vertx.ext.mongo.UpdateOptions(new io.vertx.core.json.JsonObject(options)) : null, resultHandler);
     return this;
   }
@@ -150,7 +150,7 @@ public class MongoClient {
    * @param resultHandler will be called when complete
    * @return 
    */
-  public MongoClient replace(String collection, Map<String, Object> query, Map<String, Object> replace, Handler<AsyncResult<Void>> resultHandler) {
+  public MongoClient replace(String collection, Map<String, Object> query, Map<String, Object> replace, Handler<AsyncResult<Long>> resultHandler) {
     this.delegate.replace(collection, query != null ? new io.vertx.core.json.JsonObject(query) : null, replace != null ? new io.vertx.core.json.JsonObject(replace) : null, resultHandler);
     return this;
   }
@@ -163,7 +163,7 @@ public class MongoClient {
    * @param resultHandler will be called when complete
    * @return 
    */
-  public MongoClient replaceWithOptions(String collection, Map<String, Object> query, Map<String, Object> replace, Map<String, Object> options, Handler<AsyncResult<Void>> resultHandler) {
+  public MongoClient replaceWithOptions(String collection, Map<String, Object> query, Map<String, Object> replace, Map<String, Object> options, Handler<AsyncResult<Long>> resultHandler) {
     this.delegate.replaceWithOptions(collection, query != null ? new io.vertx.core.json.JsonObject(query) : null, replace != null ? new io.vertx.core.json.JsonObject(replace) : null, options != null ? new io.vertx.ext.mongo.UpdateOptions(new io.vertx.core.json.JsonObject(options)) : null, resultHandler);
     return this;
   }
@@ -301,7 +301,7 @@ public class MongoClient {
    * @param resultHandler will be called when complete
    * @return 
    */
-  public MongoClient remove(String collection, Map<String, Object> query, Handler<AsyncResult<Void>> resultHandler) {
+  public MongoClient remove(String collection, Map<String, Object> query, Handler<AsyncResult<Long>> resultHandler) {
     this.delegate.remove(collection, query != null ? new io.vertx.core.json.JsonObject(query) : null, resultHandler);
     return this;
   }
@@ -313,7 +313,7 @@ public class MongoClient {
    * @param resultHandler will be called when complete
    * @return 
    */
-  public MongoClient removeWithOptions(String collection, Map<String, Object> query, WriteOption writeOption, Handler<AsyncResult<Void>> resultHandler) {
+  public MongoClient removeWithOptions(String collection, Map<String, Object> query, WriteOption writeOption, Handler<AsyncResult<Long>> resultHandler) {
     this.delegate.removeWithOptions(collection, query != null ? new io.vertx.core.json.JsonObject(query) : null, writeOption, resultHandler);
     return this;
   }
@@ -324,7 +324,7 @@ public class MongoClient {
    * @param resultHandler will be called when complete
    * @return 
    */
-  public MongoClient removeOne(String collection, Map<String, Object> query, Handler<AsyncResult<Void>> resultHandler) {
+  public MongoClient removeOne(String collection, Map<String, Object> query, Handler<AsyncResult<Long>> resultHandler) {
     this.delegate.removeOne(collection, query != null ? new io.vertx.core.json.JsonObject(query) : null, resultHandler);
     return this;
   }
@@ -336,7 +336,7 @@ public class MongoClient {
    * @param resultHandler will be called when complete
    * @return 
    */
-  public MongoClient removeOneWithOptions(String collection, Map<String, Object> query, WriteOption writeOption, Handler<AsyncResult<Void>> resultHandler) {
+  public MongoClient removeOneWithOptions(String collection, Map<String, Object> query, WriteOption writeOption, Handler<AsyncResult<Long>> resultHandler) {
     this.delegate.removeOneWithOptions(collection, query != null ? new io.vertx.core.json.JsonObject(query) : null, writeOption, resultHandler);
     return this;
   }

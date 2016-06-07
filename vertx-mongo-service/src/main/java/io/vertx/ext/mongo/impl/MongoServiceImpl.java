@@ -50,28 +50,28 @@ public class MongoServiceImpl implements MongoService {
 
   @Override
   @Fluent
-  public MongoService update(String collection, JsonObject query, JsonObject update, Handler<AsyncResult<Void>> resultHandler) {
+  public MongoService update(String collection, JsonObject query, JsonObject update, Handler<AsyncResult<Long>> resultHandler) {
     client.update(collection, query, update, resultHandler);
     return this;
   }
 
   @Override
   @Fluent
-  public MongoService updateWithOptions(String collection, JsonObject query, JsonObject update, UpdateOptions options, Handler<AsyncResult<Void>> resultHandler) {
+  public MongoService updateWithOptions(String collection, JsonObject query, JsonObject update, UpdateOptions options, Handler<AsyncResult<Long>> resultHandler) {
     client.updateWithOptions(collection, query, update, options, resultHandler);
     return this;
   }
 
   @Override
   @Fluent
-  public MongoService replace(String collection, JsonObject query, JsonObject replace, Handler<AsyncResult<Void>> resultHandler) {
+  public MongoService replace(String collection, JsonObject query, JsonObject replace, Handler<AsyncResult<Long>> resultHandler) {
     client.replace(collection, query, replace, resultHandler);
     return this;
   }
 
   @Override
   @Fluent
-  public MongoService replaceWithOptions(String collection, JsonObject query, JsonObject replace, UpdateOptions options, Handler<AsyncResult<Void>> resultHandler) {
+  public MongoService replaceWithOptions(String collection, JsonObject query, JsonObject replace, UpdateOptions options, Handler<AsyncResult<Long>> resultHandler) {
     client.replaceWithOptions(collection, query, replace, options, resultHandler);
     return this;
   }
@@ -118,28 +118,28 @@ public class MongoServiceImpl implements MongoService {
 
   @Override
   @Fluent
-  public MongoService remove(String collection, JsonObject query, Handler<AsyncResult<Void>> resultHandler) {
+  public MongoService remove(String collection, JsonObject query, Handler<AsyncResult<Long>> resultHandler) {
     client.remove(collection, query, resultHandler);
     return this;
   }
 
   @Override
   @Fluent
-  public MongoService removeWithOptions(String collection, JsonObject query, WriteOption writeOption, Handler<AsyncResult<Void>> resultHandler) {
+  public MongoService removeWithOptions(String collection, JsonObject query, WriteOption writeOption, Handler<AsyncResult<Long>> resultHandler) {
     client.removeWithOptions(collection, query, writeOption, resultHandler);
     return this;
   }
 
   @Override
   @Fluent
-  public MongoService removeOne(String collection, JsonObject query, Handler<AsyncResult<Void>> resultHandler) {
+  public MongoService removeOne(String collection, JsonObject query, Handler<AsyncResult<Long>> resultHandler) {
     client.removeOne(collection, query, resultHandler);
     return this;
   }
 
   @Override
   @Fluent
-  public MongoService removeOneWithOptions(String collection, JsonObject query, WriteOption writeOption, Handler<AsyncResult<Void>> resultHandler) {
+  public MongoService removeOneWithOptions(String collection, JsonObject query, WriteOption writeOption, Handler<AsyncResult<Long>> resultHandler) {
     client.removeOneWithOptions(collection, query, writeOption, resultHandler);
     return this;
   }

@@ -143,7 +143,7 @@ var MongoClient = function(j_val) {
     if (__args.length === 4 && typeof __args[0] === 'string' && (typeof __args[1] === 'object' && __args[1] != null) && (typeof __args[2] === 'object' && __args[2] != null) && typeof __args[3] === 'function') {
       j_mongoClient["update(java.lang.String,io.vertx.core.json.JsonObject,io.vertx.core.json.JsonObject,io.vertx.core.Handler)"](collection, utils.convParamJsonObject(query), utils.convParamJsonObject(update), function(ar) {
       if (ar.succeeded()) {
-        resultHandler(null, null);
+        resultHandler(ar.result(), null);
       } else {
         resultHandler(null, ar.cause());
       }
@@ -168,7 +168,7 @@ var MongoClient = function(j_val) {
     if (__args.length === 5 && typeof __args[0] === 'string' && (typeof __args[1] === 'object' && __args[1] != null) && (typeof __args[2] === 'object' && __args[2] != null) && (typeof __args[3] === 'object' && __args[3] != null) && typeof __args[4] === 'function') {
       j_mongoClient["updateWithOptions(java.lang.String,io.vertx.core.json.JsonObject,io.vertx.core.json.JsonObject,io.vertx.ext.mongo.UpdateOptions,io.vertx.core.Handler)"](collection, utils.convParamJsonObject(query), utils.convParamJsonObject(update), options != null ? new UpdateOptions(new JsonObject(JSON.stringify(options))) : null, function(ar) {
       if (ar.succeeded()) {
-        resultHandler(null, null);
+        resultHandler(ar.result(), null);
       } else {
         resultHandler(null, ar.cause());
       }
@@ -192,7 +192,7 @@ var MongoClient = function(j_val) {
     if (__args.length === 4 && typeof __args[0] === 'string' && (typeof __args[1] === 'object' && __args[1] != null) && (typeof __args[2] === 'object' && __args[2] != null) && typeof __args[3] === 'function') {
       j_mongoClient["replace(java.lang.String,io.vertx.core.json.JsonObject,io.vertx.core.json.JsonObject,io.vertx.core.Handler)"](collection, utils.convParamJsonObject(query), utils.convParamJsonObject(replace), function(ar) {
       if (ar.succeeded()) {
-        resultHandler(null, null);
+        resultHandler(ar.result(), null);
       } else {
         resultHandler(null, ar.cause());
       }
@@ -217,7 +217,7 @@ var MongoClient = function(j_val) {
     if (__args.length === 5 && typeof __args[0] === 'string' && (typeof __args[1] === 'object' && __args[1] != null) && (typeof __args[2] === 'object' && __args[2] != null) && (typeof __args[3] === 'object' && __args[3] != null) && typeof __args[4] === 'function') {
       j_mongoClient["replaceWithOptions(java.lang.String,io.vertx.core.json.JsonObject,io.vertx.core.json.JsonObject,io.vertx.ext.mongo.UpdateOptions,io.vertx.core.Handler)"](collection, utils.convParamJsonObject(query), utils.convParamJsonObject(replace), options != null ? new UpdateOptions(new JsonObject(JSON.stringify(options))) : null, function(ar) {
       if (ar.succeeded()) {
-        resultHandler(null, null);
+        resultHandler(ar.result(), null);
       } else {
         resultHandler(null, ar.cause());
       }
@@ -383,7 +383,7 @@ var MongoClient = function(j_val) {
     if (__args.length === 3 && typeof __args[0] === 'string' && (typeof __args[1] === 'object' && __args[1] != null) && typeof __args[2] === 'function') {
       j_mongoClient["remove(java.lang.String,io.vertx.core.json.JsonObject,io.vertx.core.Handler)"](collection, utils.convParamJsonObject(query), function(ar) {
       if (ar.succeeded()) {
-        resultHandler(null, null);
+        resultHandler(ar.result(), null);
       } else {
         resultHandler(null, ar.cause());
       }
@@ -407,7 +407,7 @@ var MongoClient = function(j_val) {
     if (__args.length === 4 && typeof __args[0] === 'string' && (typeof __args[1] === 'object' && __args[1] != null) && typeof __args[2] === 'string' && typeof __args[3] === 'function') {
       j_mongoClient["removeWithOptions(java.lang.String,io.vertx.core.json.JsonObject,io.vertx.ext.mongo.WriteOption,io.vertx.core.Handler)"](collection, utils.convParamJsonObject(query), io.vertx.ext.mongo.WriteOption.valueOf(__args[2]), function(ar) {
       if (ar.succeeded()) {
-        resultHandler(null, null);
+        resultHandler(ar.result(), null);
       } else {
         resultHandler(null, ar.cause());
       }
@@ -430,7 +430,7 @@ var MongoClient = function(j_val) {
     if (__args.length === 3 && typeof __args[0] === 'string' && (typeof __args[1] === 'object' && __args[1] != null) && typeof __args[2] === 'function') {
       j_mongoClient["removeOne(java.lang.String,io.vertx.core.json.JsonObject,io.vertx.core.Handler)"](collection, utils.convParamJsonObject(query), function(ar) {
       if (ar.succeeded()) {
-        resultHandler(null, null);
+        resultHandler(ar.result(), null);
       } else {
         resultHandler(null, ar.cause());
       }
@@ -454,7 +454,7 @@ var MongoClient = function(j_val) {
     if (__args.length === 4 && typeof __args[0] === 'string' && (typeof __args[1] === 'object' && __args[1] != null) && typeof __args[2] === 'string' && typeof __args[3] === 'function') {
       j_mongoClient["removeOneWithOptions(java.lang.String,io.vertx.core.json.JsonObject,io.vertx.ext.mongo.WriteOption,io.vertx.core.Handler)"](collection, utils.convParamJsonObject(query), io.vertx.ext.mongo.WriteOption.valueOf(__args[2]), function(ar) {
       if (ar.succeeded()) {
-        resultHandler(null, null);
+        resultHandler(ar.result(), null);
       } else {
         resultHandler(null, ar.cause());
       }
