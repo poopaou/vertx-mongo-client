@@ -116,7 +116,7 @@ public interface MongoClient {
    * @param resultHandler will be called when complete
    */
   @Fluent
-  MongoClient update(String collection, JsonObject query, JsonObject update, Handler<AsyncResult<Void>> resultHandler);
+  MongoClient update(String collection, JsonObject query, JsonObject update, Handler<AsyncResult<UpdateResult>> resultHandler);
 
   /**
    * Update matching documents in the specified collection, specifying options
@@ -128,7 +128,7 @@ public interface MongoClient {
    * @param resultHandler will be called when complete
    */
   @Fluent
-  MongoClient updateWithOptions(String collection, JsonObject query, JsonObject update, UpdateOptions options, Handler<AsyncResult<Void>> resultHandler);
+  MongoClient updateWithOptions(String collection, JsonObject query, JsonObject update, UpdateOptions options, Handler<AsyncResult<UpdateResult>> resultHandler);
 
   /**
    * Replace matching documents in the specified collection
@@ -139,7 +139,7 @@ public interface MongoClient {
    * @param resultHandler will be called when complete
    */
   @Fluent
-  MongoClient replace(String collection, JsonObject query, JsonObject replace, Handler<AsyncResult<Void>> resultHandler);
+  MongoClient replace(String collection, JsonObject query, JsonObject replace, Handler<AsyncResult<UpdateResult>> resultHandler);
 
   /**
    * Replace matching documents in the specified collection, specifying options
@@ -151,7 +151,7 @@ public interface MongoClient {
    * @param resultHandler will be called when complete
    */
   @Fluent
-  MongoClient replaceWithOptions(String collection, JsonObject query, JsonObject replace, UpdateOptions options, Handler<AsyncResult<Void>> resultHandler);
+  MongoClient replaceWithOptions(String collection, JsonObject query, JsonObject replace, UpdateOptions options, Handler<AsyncResult<UpdateResult>> resultHandler);
 
   /**
    * Find matching documents in the specified collection
@@ -226,7 +226,7 @@ public interface MongoClient {
    * @param resultHandler will be called when complete
    */
   @Fluent
-  MongoClient remove(String collection, JsonObject query, Handler<AsyncResult<Void>> resultHandler);
+  MongoClient remove(String collection, JsonObject query, Handler<AsyncResult<DeleteResult>> resultHandler);
 
   /**
    * Remove matching documents from a collection with the specified write option
@@ -237,7 +237,7 @@ public interface MongoClient {
    * @param resultHandler will be called when complete
    */
   @Fluent
-  MongoClient removeWithOptions(String collection, JsonObject query, WriteOption writeOption, Handler<AsyncResult<Void>> resultHandler);
+  MongoClient removeWithOptions(String collection, JsonObject query, WriteOption writeOption, Handler<AsyncResult<DeleteResult>> resultHandler);
 
   /**
    * Remove a single matching document from a collection
@@ -247,7 +247,7 @@ public interface MongoClient {
    * @param resultHandler will be called when complete
    */
   @Fluent
-  MongoClient removeOne(String collection, JsonObject query, Handler<AsyncResult<Void>> resultHandler);
+  MongoClient removeOne(String collection, JsonObject query, Handler<AsyncResult<DeleteResult>> resultHandler);
 
   /**
    * Remove a single matching document from a collection with the specified write option
@@ -258,7 +258,7 @@ public interface MongoClient {
    * @param resultHandler will be called when complete
    */
   @Fluent
-  MongoClient removeOneWithOptions(String collection, JsonObject query, WriteOption writeOption, Handler<AsyncResult<Void>> resultHandler);
+  MongoClient removeOneWithOptions(String collection, JsonObject query, WriteOption writeOption, Handler<AsyncResult<DeleteResult>> resultHandler);
 
   /**
    * Create a new collection

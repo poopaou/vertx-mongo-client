@@ -30,6 +30,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.function.Function;
 import io.vertx.serviceproxy.ProxyHelper;
+import io.vertx.serviceproxy.ServiceException;
+import io.vertx.serviceproxy.ServiceExceptionMessageCodec;
 import io.vertx.ext.mongo.WriteOption;
 import io.vertx.core.Vertx;
 import io.vertx.ext.mongo.MongoClient;
@@ -39,6 +41,8 @@ import java.util.List;
 import io.vertx.ext.mongo.FindOptions;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.AsyncResult;
+import io.vertx.ext.mongo.UpdateResult;
+import io.vertx.ext.mongo.DeleteResult;
 import io.vertx.core.Handler;
 import io.vertx.ext.mongo.UpdateOptions;
 
@@ -61,6 +65,10 @@ public class MongoServiceVertxEBProxy implements MongoService {
     this._vertx = vertx;
     this._address = address;
     this._options = options;
+    try {
+      this._vertx.eventBus().registerDefaultCodec(ServiceException.class,
+          new ServiceExceptionMessageCodec());
+    } catch (IllegalStateException ex) {}
   }
 
   public MongoService save(String collection, JsonObject document, Handler<AsyncResult<String>> resultHandler) {
@@ -145,7 +153,7 @@ public class MongoServiceVertxEBProxy implements MongoService {
     return this;
   }
 
-  public MongoService update(String collection, JsonObject query, JsonObject update, Handler<AsyncResult<Void>> resultHandler) {
+  public MongoService update(String collection, JsonObject query, JsonObject update, Handler<AsyncResult<UpdateResult>> resultHandler) {
     if (closed) {
       resultHandler.handle(Future.failedFuture(new IllegalStateException("Proxy is closed")));
       return this;
@@ -156,17 +164,17 @@ public class MongoServiceVertxEBProxy implements MongoService {
     _json.put("update", update);
     DeliveryOptions _deliveryOptions = (_options != null) ? new DeliveryOptions(_options) : new DeliveryOptions();
     _deliveryOptions.addHeader("action", "update");
-    _vertx.eventBus().<Void>send(_address, _json, _deliveryOptions, res -> {
+    _vertx.eventBus().<JsonObject>send(_address, _json, _deliveryOptions, res -> {
       if (res.failed()) {
         resultHandler.handle(Future.failedFuture(res.cause()));
       } else {
-        resultHandler.handle(Future.succeededFuture(res.result().body()));
-      }
+        resultHandler.handle(Future.succeededFuture(res.result().body() == null ? null : new UpdateResult(res.result().body())));
+                      }
     });
     return this;
   }
 
-  public MongoService updateWithOptions(String collection, JsonObject query, JsonObject update, UpdateOptions options, Handler<AsyncResult<Void>> resultHandler) {
+  public MongoService updateWithOptions(String collection, JsonObject query, JsonObject update, UpdateOptions options, Handler<AsyncResult<UpdateResult>> resultHandler) {
     if (closed) {
       resultHandler.handle(Future.failedFuture(new IllegalStateException("Proxy is closed")));
       return this;
@@ -178,17 +186,17 @@ public class MongoServiceVertxEBProxy implements MongoService {
     _json.put("options", options == null ? null : options.toJson());
     DeliveryOptions _deliveryOptions = (_options != null) ? new DeliveryOptions(_options) : new DeliveryOptions();
     _deliveryOptions.addHeader("action", "updateWithOptions");
-    _vertx.eventBus().<Void>send(_address, _json, _deliveryOptions, res -> {
+    _vertx.eventBus().<JsonObject>send(_address, _json, _deliveryOptions, res -> {
       if (res.failed()) {
         resultHandler.handle(Future.failedFuture(res.cause()));
       } else {
-        resultHandler.handle(Future.succeededFuture(res.result().body()));
-      }
+        resultHandler.handle(Future.succeededFuture(res.result().body() == null ? null : new UpdateResult(res.result().body())));
+                      }
     });
     return this;
   }
 
-  public MongoService replace(String collection, JsonObject query, JsonObject replace, Handler<AsyncResult<Void>> resultHandler) {
+  public MongoService replace(String collection, JsonObject query, JsonObject replace, Handler<AsyncResult<UpdateResult>> resultHandler) {
     if (closed) {
       resultHandler.handle(Future.failedFuture(new IllegalStateException("Proxy is closed")));
       return this;
@@ -199,17 +207,17 @@ public class MongoServiceVertxEBProxy implements MongoService {
     _json.put("replace", replace);
     DeliveryOptions _deliveryOptions = (_options != null) ? new DeliveryOptions(_options) : new DeliveryOptions();
     _deliveryOptions.addHeader("action", "replace");
-    _vertx.eventBus().<Void>send(_address, _json, _deliveryOptions, res -> {
+    _vertx.eventBus().<JsonObject>send(_address, _json, _deliveryOptions, res -> {
       if (res.failed()) {
         resultHandler.handle(Future.failedFuture(res.cause()));
       } else {
-        resultHandler.handle(Future.succeededFuture(res.result().body()));
-      }
+        resultHandler.handle(Future.succeededFuture(res.result().body() == null ? null : new UpdateResult(res.result().body())));
+                      }
     });
     return this;
   }
 
-  public MongoService replaceWithOptions(String collection, JsonObject query, JsonObject replace, UpdateOptions options, Handler<AsyncResult<Void>> resultHandler) {
+  public MongoService replaceWithOptions(String collection, JsonObject query, JsonObject replace, UpdateOptions options, Handler<AsyncResult<UpdateResult>> resultHandler) {
     if (closed) {
       resultHandler.handle(Future.failedFuture(new IllegalStateException("Proxy is closed")));
       return this;
@@ -221,12 +229,12 @@ public class MongoServiceVertxEBProxy implements MongoService {
     _json.put("options", options == null ? null : options.toJson());
     DeliveryOptions _deliveryOptions = (_options != null) ? new DeliveryOptions(_options) : new DeliveryOptions();
     _deliveryOptions.addHeader("action", "replaceWithOptions");
-    _vertx.eventBus().<Void>send(_address, _json, _deliveryOptions, res -> {
+    _vertx.eventBus().<JsonObject>send(_address, _json, _deliveryOptions, res -> {
       if (res.failed()) {
         resultHandler.handle(Future.failedFuture(res.cause()));
       } else {
-        resultHandler.handle(Future.succeededFuture(res.result().body()));
-      }
+        resultHandler.handle(Future.succeededFuture(res.result().body() == null ? null : new UpdateResult(res.result().body())));
+                      }
     });
     return this;
   }
@@ -354,7 +362,7 @@ public class MongoServiceVertxEBProxy implements MongoService {
     return this;
   }
 
-  public MongoService remove(String collection, JsonObject query, Handler<AsyncResult<Void>> resultHandler) {
+  public MongoService remove(String collection, JsonObject query, Handler<AsyncResult<DeleteResult>> resultHandler) {
     if (closed) {
       resultHandler.handle(Future.failedFuture(new IllegalStateException("Proxy is closed")));
       return this;
@@ -364,17 +372,17 @@ public class MongoServiceVertxEBProxy implements MongoService {
     _json.put("query", query);
     DeliveryOptions _deliveryOptions = (_options != null) ? new DeliveryOptions(_options) : new DeliveryOptions();
     _deliveryOptions.addHeader("action", "remove");
-    _vertx.eventBus().<Void>send(_address, _json, _deliveryOptions, res -> {
+    _vertx.eventBus().<JsonObject>send(_address, _json, _deliveryOptions, res -> {
       if (res.failed()) {
         resultHandler.handle(Future.failedFuture(res.cause()));
       } else {
-        resultHandler.handle(Future.succeededFuture(res.result().body()));
-      }
+        resultHandler.handle(Future.succeededFuture(res.result().body() == null ? null : new DeleteResult(res.result().body())));
+                      }
     });
     return this;
   }
 
-  public MongoService removeWithOptions(String collection, JsonObject query, WriteOption writeOption, Handler<AsyncResult<Void>> resultHandler) {
+  public MongoService removeWithOptions(String collection, JsonObject query, WriteOption writeOption, Handler<AsyncResult<DeleteResult>> resultHandler) {
     if (closed) {
       resultHandler.handle(Future.failedFuture(new IllegalStateException("Proxy is closed")));
       return this;
@@ -385,17 +393,17 @@ public class MongoServiceVertxEBProxy implements MongoService {
     _json.put("writeOption", writeOption == null ? null : writeOption.toString());
     DeliveryOptions _deliveryOptions = (_options != null) ? new DeliveryOptions(_options) : new DeliveryOptions();
     _deliveryOptions.addHeader("action", "removeWithOptions");
-    _vertx.eventBus().<Void>send(_address, _json, _deliveryOptions, res -> {
+    _vertx.eventBus().<JsonObject>send(_address, _json, _deliveryOptions, res -> {
       if (res.failed()) {
         resultHandler.handle(Future.failedFuture(res.cause()));
       } else {
-        resultHandler.handle(Future.succeededFuture(res.result().body()));
-      }
+        resultHandler.handle(Future.succeededFuture(res.result().body() == null ? null : new DeleteResult(res.result().body())));
+                      }
     });
     return this;
   }
 
-  public MongoService removeOne(String collection, JsonObject query, Handler<AsyncResult<Void>> resultHandler) {
+  public MongoService removeOne(String collection, JsonObject query, Handler<AsyncResult<DeleteResult>> resultHandler) {
     if (closed) {
       resultHandler.handle(Future.failedFuture(new IllegalStateException("Proxy is closed")));
       return this;
@@ -405,17 +413,17 @@ public class MongoServiceVertxEBProxy implements MongoService {
     _json.put("query", query);
     DeliveryOptions _deliveryOptions = (_options != null) ? new DeliveryOptions(_options) : new DeliveryOptions();
     _deliveryOptions.addHeader("action", "removeOne");
-    _vertx.eventBus().<Void>send(_address, _json, _deliveryOptions, res -> {
+    _vertx.eventBus().<JsonObject>send(_address, _json, _deliveryOptions, res -> {
       if (res.failed()) {
         resultHandler.handle(Future.failedFuture(res.cause()));
       } else {
-        resultHandler.handle(Future.succeededFuture(res.result().body()));
-      }
+        resultHandler.handle(Future.succeededFuture(res.result().body() == null ? null : new DeleteResult(res.result().body())));
+                      }
     });
     return this;
   }
 
-  public MongoService removeOneWithOptions(String collection, JsonObject query, WriteOption writeOption, Handler<AsyncResult<Void>> resultHandler) {
+  public MongoService removeOneWithOptions(String collection, JsonObject query, WriteOption writeOption, Handler<AsyncResult<DeleteResult>> resultHandler) {
     if (closed) {
       resultHandler.handle(Future.failedFuture(new IllegalStateException("Proxy is closed")));
       return this;
@@ -426,12 +434,12 @@ public class MongoServiceVertxEBProxy implements MongoService {
     _json.put("writeOption", writeOption == null ? null : writeOption.toString());
     DeliveryOptions _deliveryOptions = (_options != null) ? new DeliveryOptions(_options) : new DeliveryOptions();
     _deliveryOptions.addHeader("action", "removeOneWithOptions");
-    _vertx.eventBus().<Void>send(_address, _json, _deliveryOptions, res -> {
+    _vertx.eventBus().<JsonObject>send(_address, _json, _deliveryOptions, res -> {
       if (res.failed()) {
         resultHandler.handle(Future.failedFuture(res.cause()));
       } else {
-        resultHandler.handle(Future.succeededFuture(res.result().body()));
-      }
+        resultHandler.handle(Future.succeededFuture(res.result().body() == null ? null : new DeleteResult(res.result().body())));
+                      }
     });
     return this;
   }

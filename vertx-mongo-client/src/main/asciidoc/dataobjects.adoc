@@ -1,5 +1,23 @@
 = Cheatsheets
 
+[[DeleteResult]]
+== DeleteResult
+
+++++
+ Created by cysondag on 07/06/2016.
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[deletedCount]]`deletedCount`|`Number (Long)`|
++++
+Gets the number of documents deleted.
++++
+|===
+
 [[FindOptions]]
 == FindOptions
 
@@ -53,6 +71,39 @@ Set whether upsert is enabled
 |[[writeOption]]`writeOption`|`link:enums.html#WriteOption[WriteOption]`|
 +++
 Set the write option
++++
+|===
+
+[[UpdateResult]]
+== UpdateResult
+
+++++
+ The result of an update operation.  If the update was unacknowledged, then <code>wasAcknowledged</code> will return false.
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[matchedCount]]`matchedCount`|`Number (Long)`|
++++
+Gets the number of documents matched by the query.
++++
+|[[modifiedCount]]`modifiedCount`|`Number (Long)`|
++++
+Gets the number of documents modified by the update.
++++
+|[[modifiedCountAvailable]]`modifiedCountAvailable`|`Boolean`|
++++
+Gets a value indicating whether the modified count is available.
+ <p>
+ The modified count is only available when all servers have been upgraded to 2.6 or above.
+ </p>
++++
+|[[upsertedId]]`upsertedId`|`String`|
++++
+If the replace resulted in an inserted document, gets the _id of the inserted document, otherwise null.
 +++
 |===
 
